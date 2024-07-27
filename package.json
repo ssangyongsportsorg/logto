@@ -3,7 +3,6 @@
   "private": true,
   "license": "MPL-2.0",
   "type": "module",
-  {
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "pnpm:devPreinstall": "cd packages/connectors && node templates/sync-preset.js",
@@ -16,7 +15,7 @@
     "cli": "logto",
     "changeset": "changeset",
     "alteration": "logto db alt",
-    "alteration deploy": "logto db alt deploy",  // 添加這一行來定義 alteration deploy 命令
+    "alteration deploy": "logto db alt deploy",
     "connectors": "pnpm -r --filter \"./packages/connectors/connector-*\"",
     "//": "# `changeset version` won't run version lifecycle scripts, see https://github.com/changesets/changesets/issues/860",
     "ci:version": "changeset version && pnpm -r version",
@@ -24,9 +23,7 @@
     "ci:lint": "pnpm -r --parallel --workspace-concurrency=0 lint",
     "ci:stylelint": "pnpm -r --parallel --workspace-concurrency=0 stylelint",
     "ci:test": "pnpm -r --parallel --workspace-concurrency=0 test:ci"
-  }
-}
-
+  },
   "engines": {
     "node": "^20.9.0",
     "pnpm": "^9.0.0"
