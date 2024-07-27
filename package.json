@@ -1,3 +1,4 @@
+
 {
   "name": "@logto/root",
   "private": true,
@@ -15,7 +16,6 @@
     "cli": "logto",
     "changeset": "changeset",
     "alteration": "logto db alt",
-    "alteration deploy": "logto db alt deploy",
     "connectors": "pnpm -r --filter \"./packages/connectors/connector-*\"",
     "//": "# `changeset version` won't run version lifecycle scripts, see https://github.com/changesets/changesets/issues/860",
     "ci:version": "changeset version && pnpm -r version",
@@ -23,6 +23,17 @@
     "ci:lint": "pnpm -r --parallel --workspace-concurrency=0 lint",
     "ci:stylelint": "pnpm -r --parallel --workspace-concurrency=0 stylelint",
     "ci:test": "pnpm -r --parallel --workspace-concurrency=0 test:ci"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.26.2",
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
+    "@commitlint/types": "^19.0.0",
+    "@types/pg": "^8.6.6",
+    "husky": "^9.0.0",
+    "pg": "^8.8.0",
+    "typescript": "^5.0.0",
+    "vite": "^5.3.4"
   },
   "engines": {
     "node": "^20.9.0",
