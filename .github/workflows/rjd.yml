@@ -3,7 +3,7 @@ name: Deploy and Seed Database
 on:
   push:
     branches:
-      - main  # 或是你想觸發部署的分支
+     - master  # 或是你想觸發部署的分支
 
 jobs:
   deploy:
