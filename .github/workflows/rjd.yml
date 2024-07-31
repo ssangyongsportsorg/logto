@@ -18,8 +18,6 @@ jobs:
       with:
         node-version: '14'  # 替換成你使用的 Node.js 版本
 
-    - name: Install dependencies
-      run: npm install
 
     - name: Deploy database alterations
       run: npm run alteration deploy
