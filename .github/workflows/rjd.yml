@@ -1,0 +1,33 @@
+name: Deploy and Seed Database
+
+on:
+  push:
+    branches:
+      - main  # 或是你想觸發部署的分支
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'  # 替換成你使用的 Node.js 版本
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Deploy database alterations
+      run: npm run alteration deploy
+
+    - name: Seed database
+      run: npm run cli db seed -- --swe
+
+    - name: Start application
+      run: npm start
+      env:
+        PORT: 8080
