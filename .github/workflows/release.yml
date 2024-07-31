@@ -41,8 +41,8 @@ jobs:
       - name: Tag and Push Docker image
         if: github.event_name == 'push'
         run: |
-          docker tag $GITHUB_REPOSITORY $GITHUB_REPOSITORY:$SHORT_SHA
-          docker push $GITHUB_REPOSITORY:$SHORT_SHA
+          docker tag ssangyongsports logto:$SHORT_SHA
+          docker push ssangyongsports/logto:$SHORT_SHA
           echo "SHORT_SHA: ${SHORT_SHA}"
         env:
           SHORT_SHA: ${{ steps.vars.outputs.short_sha }}
@@ -50,8 +50,8 @@ jobs:
       - name: Tag LATEST and Push Docker image
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
-          docker tag $GITHUB_REPOSITORY $GITHUB_REPOSITORY:latest
-          docker push $GITHUB_REPOSITORY:latest
+          docker tag ssangyongsports logto:latest
+          docker push ssangyongsports/logto:latest
           echo "LATEST deployed!"
 
       - name: Tag RELEASE and Push Docker image
