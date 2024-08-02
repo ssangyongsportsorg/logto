@@ -35,28 +35,25 @@ jobs:
                --build-arg NODE_MAJOR=16 \
                --build-arg YARN_VERSION=1.13.0 \
                --build-arg BUNDLER_VERSION=2.3.26 \
-               -t $GITHUB_REPOSITORY \
+               -t ssangyongsports/logto:${{ steps.vars.outputs.short_sha }} \
                .
 
-      - name: Tag and Push Docker image
+      - name: Tag and Push Docker image with SHA
         if: github.event_name == 'push'
         run: |
-          docker tag ssangyongsports logto:$SHORT_SHA
-          docker push ssangyongsports/logto:$SHORT_SHA
-          echo "SHORT_SHA: ${SHORT_SHA}"
-        env:
-          SHORT_SHA: ${{ steps.vars.outputs.short_sha }}
+          docker push ssangyongsports/logto:${{ steps.vars.outputs.short_sha }}
+          echo "Pushed Docker image with tag: ${{ steps.vars.outputs.short_sha }}"
 
       - name: Tag LATEST and Push Docker image
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
-          docker tag ssangyongsports logto:latest
+          docker tag ssangyongsports/logto:${{ steps.vars.outputs.short_sha }} ssangyongsports/logto:latest
           docker push ssangyongsports/logto:latest
-          echo "LATEST deployed!"
+          echo "Pushed Docker image with tag: latest"
 
       - name: Tag RELEASE and Push Docker image
-        if: github.event_name	== 'release'
+        if: github.event_name == 'release'
         run: |
-          docker tag $GITHUB_REPOSITORY $GITHUB_REPOSITORY:${{ github.ref_name }}
-          docker push $GITHUB_REPOSITORY:${{ github.ref_name }}
-          echo "${{ github.ref_name }} deployed!"
+          docker tag ssangyongsports/logto:${{ steps.vars.outputs.short_sha }} ssangyongsports/logto:${{ github.ref_name }}
+          docker push ssangyongsports/logto:${{ github.ref_name }}
+          echo "Pushed Docker image with tag: ${{ github.ref_name }}"
